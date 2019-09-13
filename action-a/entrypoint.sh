@@ -26,3 +26,11 @@ echo Now to build the mod.
 echo pwd is:
 
 pwd
+
+echo checking mono installed
+
+command -v mono
+
+echo checking mono version
+
+mono -v
