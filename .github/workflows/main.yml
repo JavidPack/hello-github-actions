@@ -13,12 +13,18 @@ jobs:
     - uses: ./action-a
       env:
         MY_NAME: "Mona"
-    - name: Discord notification
+    - uses: ./action-b
       env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      uses: Ilshidur/action-discord@0.0.2
-      with:
-        args: 'The project has been deployed.'
+        MY_NAME: "Bob"
+
+
+#    - name: Discord notification
+#      env:
+#        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+#      uses: Ilshidur/action-discord@0.0.2
+#      with:
+#        args: 'The project has been deployed.'
+
 #  otherjob:
 #    name: This is the name of the other job
 #    runs-on: ubuntu-latest
