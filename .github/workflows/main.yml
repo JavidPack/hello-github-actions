@@ -40,7 +40,7 @@ jobs:
             print "Mod Browser up-to-date. No need to update."
             exit(1)
     - name: Build Mod
-      if: failure()
+      if: success()
       env:
         MY_NAME: "TestMan2"
       run: |
