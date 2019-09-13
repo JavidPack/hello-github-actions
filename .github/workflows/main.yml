@@ -10,6 +10,32 @@ jobs:
     runs-on: ubuntu-latest    
     steps:
     - uses: actions/checkout@master
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+    - name: Check build.txt version
+      shell: python
+      run: |
+        from urllib.request import urlopen
+        from distutils.version import LooseVersion
+        modBrowserVersionString = urlopen("http://javid.ddns.net/tModLoader/tools/latestmodversionsimple.php?modname=BossChecklist").read().decode('utf-8')
+        print(modBrowserVersionString)
+        modBrowserVersion = LooseVersion(modBrowserVersionString[1:]) # v1.0
+        print("Mod Browser version: " + str(modBrowserVersion))
+        with open("build.txt") as fh:
+          for line in fh:
+              if line.startswith("version"):  # version = 1.0
+                  buildVersion = line[line.index('=') + 1:].strip()
+                  print(line)
+        print("build.txt version: " + str(buildVersion))
+        print("Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion))
+        if modBrowserVersion < buildVersion:
+            print("build.txt version newer. Update needed")
+            exit(0)
+        else:
+            print("Mod Browser up-to-date. No need to update.")
+            exit(1)
     - name: Build Mod
       env:
         MY_NAME: "TestMan2"
