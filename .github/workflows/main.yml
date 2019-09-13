@@ -10,3 +10,14 @@ jobs:
     - uses: ./action-a
       env:
         MY_NAME: "Mona"
+  otherjob:
+    name: This is the name of the other job
+    steps:
+    - name: Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@0.0.2
+      with:
+        args: 'The project has been deployed.'
+
+
