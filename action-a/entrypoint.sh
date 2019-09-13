@@ -38,6 +38,11 @@ unzip ModCompile.zip -d ./tModLoader/ModCompile
 echo Upgrade to tModLoader-mono
 cp ./tModLoader/tModLoader-mono ./tModLoader/tModLoaderServer
 
+echo pwd is:
+pwd
+echo ls -l is:
+ls -l
+
 echo CD to GITHUB_WORKSPACE 
 cd $GITHUB_WORKSPACE
 echo pwd is:
