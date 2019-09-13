@@ -43,6 +43,12 @@ pwd
 echo ls -l is:
 ls -l
 
+echo CD to tModLoader 
+echo pwd is:
+pwd
+echo ls -l is:
+ls -l
+
 echo CD to GITHUB_WORKSPACE 
 cd $GITHUB_WORKSPACE
 echo pwd is:
