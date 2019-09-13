@@ -34,11 +34,11 @@ jobs:
         print "Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion)
         if modBrowserVersion < buildVersion:
             print "build.txt version newer. Update needed"
-            os.environ['PublishNeeded'] = '1'
-            #exit(0)
+            #os.environ['PublishNeeded'] = '1'
+            exit(0)
         else:
             print "Mod Browser up-to-date. No need to update."
-            #exit(1)
+            exit(1)
     - name: Build Mod
       if: failure()
       env:
