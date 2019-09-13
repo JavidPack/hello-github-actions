@@ -34,23 +34,30 @@ jobs:
         print "Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion)
         if modBrowserVersion < buildVersion:
             print "build.txt version newer. Update needed"
-            os.environ['PUBLISHNEEDED'] = 'Yes'
+            open("buildneeded.txt", 'a').close()
+            #not working for some reason, need to make file
+            #os.environ['PUBLISHNEEDED'] = 'Yes'
             #exit(0)
         else:
             print "Mod Browser up-to-date. No need to update."
-            os.environ['PUBLISHNEEDED'] = 'No'
+            #os.environ['PUBLISHNEEDED'] = 'No'
             #exit(1)
     - name: Build Mod
       #if: success()
       env:
         MY_NAME: "TestMan2"
       run: |
-        echo PublishNeeded: $PUBLISHNEEDED
-        if [ "$PUBLISHNEEDED" != "Yes" ]
-        then
-          echo Publish Not Needed.
+        #echo PublishNeeded: $PUBLISHNEEDED
+        FILE=buildneeded.txt
+        if [ ! -f "$FILE" ]; then
+          echo "$FILE does not exist. Publish Not Needed."
           exit
         fi
+        #if [ "$PUBLISHNEEDED" != "Yes" ]
+        #then
+        #  echo Publish Not Needed.
+        #  exit
+        #fi
         echo Hello world my name is $MY_NAME
         echo checking mono version
         mono -V
