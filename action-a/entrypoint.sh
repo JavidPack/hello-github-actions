@@ -5,7 +5,7 @@ echo Hello world my name is $MY_NAME
 echo checking mono installed
 command -v mono
 echo checking mono version
-mono -v
+mono -V
 
 echo pwd is:
 pwd
