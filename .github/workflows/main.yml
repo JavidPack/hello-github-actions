@@ -13,9 +13,9 @@ jobs:
     - uses: ./action-a
       env:
         MY_NAME: "Mona"
-    - uses: ./action-b
-      env:
-        MY_NAME: "Bob"
+#    - uses: ./action-b
+#      env:
+#        MY_NAME: "Bob"
 
 
 #    - name: Discord notification
