@@ -12,6 +12,7 @@ jobs:
         MY_NAME: "Mona"
   otherjob:
     name: This is the name of the other job
+    runs-on: ubuntu-latest
     steps:
     - name: Discord notification
       env:
