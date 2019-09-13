@@ -10,21 +10,16 @@ jobs:
     runs-on: ubuntu-latest    
     steps:
     - uses: actions/checkout@master
-    - run: python -c "import sys; print sys.version"
-    - uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
-        architecture: 'x64'
-    - run: python -c "import sys; print(sys.version)"  
-    - shell: python
-      run: |    
-        import sys
-        print(sys.version)
+#    - uses: actions/setup-python@v1
+#      with:
+#        python-version: '3.x'
+#        architecture: 'x64'
     - name: Check build.txt version
       shell: python
       run: |
         #import sys
         #print(sys.version)
+        import os
         import urllib2
         from distutils.version import LooseVersion
         modBrowserVersionString = urllib2.urlopen("http://javid.ddns.net/tModLoader/tools/latestmodversionsimple.php?modname=BossChecklist").read().decode('utf-8')
@@ -39,11 +34,13 @@ jobs:
         print "Comparing versions: " + str(modBrowserVersion) + " < " + str(buildVersion)
         if modBrowserVersion < buildVersion:
             print "build.txt version newer. Update needed"
-            exit(0)
+            os.environ['PublishNeeded'] = '1'
+            #exit(0)
         else:
             print "Mod Browser up-to-date. No need to update."
-            exit(1)
+            #exit(1)
     - name: Build Mod
+      if: "$TESTVAR" = "1"
       env:
         MY_NAME: "TestMan2"
       run: |
